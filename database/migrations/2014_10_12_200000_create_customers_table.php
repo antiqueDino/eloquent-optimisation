@@ -19,6 +19,7 @@ class CreateCustomersTable extends Migration
             $table->integer('sales_rep_id')->index()->nullable();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('email')->unique();
             $table->date('birth_date')->nullable();
             $table->timestamps();
         });

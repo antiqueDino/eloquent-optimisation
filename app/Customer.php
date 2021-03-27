@@ -46,7 +46,7 @@ class Customer extends Model
 
     public function scopeOrderByBirthday($query)
     {
-        $query->orderbyRaw("to_char(birth_date, 'MMDD')");
+        $query->orderbyRaw("DATE_FORMAT('d-m-Y',birth_date)");
     }
 
     public function scopeOrderByLastInteractionDate($query)
@@ -71,10 +71,10 @@ class Customer extends Model
     {
         foreach (explode(' ', $search) as $term) {
             $query->where(function ($query) use ($term) {
-                $query->where('first_name', 'ilike', '%'.$term.'%')
-                   ->orWhere('last_name', 'ilike', '%'.$term.'%')
+                $query->where('first_name', 'like', '%'.$term.'%')
+                   ->orWhere('last_name', 'like', '%'.$term.'%')
                    ->orWhereHas('company', function ($query) use ($term) {
-                       $query->where('name', 'ilike', '%'.$term.'%');
+                       $query->where('name', 'like', '%'.$term.'%');
                    });
             });
         }
@@ -89,7 +89,7 @@ class Customer extends Model
             return $date->format('md');
         });
 
-        return $query->whereNotNull('birth_date')->whereIn(\DB::raw("to_char(birth_date, 'MMDD')"), $dates);
+        return $query->whereNotNull('birth_date')->whereIn(\DB::raw("DATE_FORMAT('d-m-Y',birth_date)"), $dates);
     }
 
     public function scopeWhereFilters($query, array $filters)

@@ -7,5 +7,6 @@ $factory->define(App\Customer::class, function (Faker $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'birth_date' => $faker->dateTimeBetween('-80 years', '-20 years'),
+        'email' => $faker->unique()->safeEmail,
     ];
 });
