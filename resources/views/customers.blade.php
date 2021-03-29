@@ -22,7 +22,7 @@
         <th><a class="{{ request('order') === 'company' ? 'text-dark' : '' }}" href="{{ route('customers', ['order' => 'company'] + request()->except('page')) }}">Company</a></th>
         <th><a class="{{ request('order') === 'birthday' ? 'text-dark' : '' }}" href="{{ route('customers', ['order' => 'birthday'] + request()->except('page')) }}">Birthday</a></th>
         <th><a class="{{ request('order') === 'last_interaction' ? 'text-dark' : '' }}" href="{{ route('customers', ['order' => 'last_interaction'] + request()->except('page')) }}">Last Interaction</a></th>
-        <th><a class="{{ request('order') === 'birthday' ? 'text-dark' : '' }}" href="{{ route('customers', ['order' => 'email'] + request()->except('page')) }}">Email</a></th>
+        <th><a class="{{ request('order') === 'email' ? 'text-dark' : '' }}" href="{{ route('customers', ['order' => 'email'] + request()->except('page')) }}">Email</a></th>
     </tr>
     @foreach ($customers as $customer)
         <tr>

@@ -18,3 +18,23 @@ Route::get('customers')
 Route::get('customers/{customer}/edit')
     ->name('customers.edit')
     ->uses('CustomersController@edit');
+
+
+Route::get('users')
+    ->name('users')
+    ->uses('UsersController@index');
+
+
+Route::get('posts')
+    ->name('posts')
+    ->uses('PostsController@index');
+
+
+Route::get('last-logins')
+    ->name('last-logins')
+    ->uses('LastLoginController@index');
+
+
+Route::get('features')
+    ->name('features')
+    ->uses('FeaturesController@index');

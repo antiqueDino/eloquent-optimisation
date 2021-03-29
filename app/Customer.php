@@ -44,6 +44,12 @@ class Customer extends Model
         $query->orderBySub(Company::select('name')->whereRaw('customers.company_id = companies.id'));
     }
 
+
+    public function scopeOrderByEmail($query)
+    {
+        $query->orderBy('email');
+    }
+
     public function scopeOrderByBirthday($query)
     {
         $query->orderbyRaw("DATE_FORMAT('d-m-Y',birth_date)");
@@ -64,6 +70,8 @@ class Customer extends Model
             $query->orderByBirthday();
         } elseif ($field === 'last_interaction') {
             $query->orderByLastInteractionDate();
+        } elseif ($field === 'email') {
+            $query->orderByEmail();
         }
     }
 
@@ -72,10 +80,10 @@ class Customer extends Model
         foreach (explode(' ', $search) as $term) {
             $query->where(function ($query) use ($term) {
                 $query->where('first_name', 'like', '%'.$term.'%')
-                   ->orWhere('last_name', 'like', '%'.$term.'%')
-                   ->orWhereHas('company', function ($query) use ($term) {
-                       $query->where('name', 'like', '%'.$term.'%');
-                   });
+                    ->orWhere('last_name', 'like', '%'.$term.'%')
+                    ->orWhereHas('company', function ($query) use ($term) {
+                        $query->where('name', 'like', '%'.$term.'%');
+                    });
             });
         }
     }
